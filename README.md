@@ -1,2 +1,2 @@
-# terraform-module-cert-manager
-terraform-module-cert-manager
+# Simple module for cert-manager
+for terraform inputs, see file: terraform-docs.md 
