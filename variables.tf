@@ -1,16 +1,13 @@
 variable "name" {
   description = "Name of the Helm release"
-  default     = "cert-manager"
 }
 
 variable "namespace" {
   description = "Namespace of the Helm release"
-  default     = "cert-manager"
 }
 
 variable "issuer_dns" {
   description = "Enable or disable DNS challange Cluster Issuer"
-  default     = 1
 }
 
 variable "cert_manager_helm_values" {
@@ -19,12 +16,10 @@ variable "cert_manager_helm_values" {
 
 variable "chart_version" {
   description = "Version of the chart to install"
-  default     = "0.14.1"
 }
 
 variable "init_chart_version" {
   description = "Version of the init chart to install"
-  default     = "1.1.0"
 }
 
 variable "hosted_zone_id" {
