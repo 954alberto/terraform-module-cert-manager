@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-cat-dns
+spec:
+  acme:
+    email: ${email}
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-dns-account-key
+    solvers:
+    - selector: {}  # catch all for every domain
+      dns01:
+        route53:
+          # No credentials here means the service account the deployment runs under must assume a role with access to r53
+          hostedZoneID: ${hostedZoneID}
+          region: ${region}

@@ -23,54 +23,32 @@ resource "helm_release" "cert-manager-init" {
   chart     = "sbp/${var.name}-init"
 }
 
+# Create Cluster Issuer Using DNS01 challange
 
-# Create Cluster Issuer using HTTP01 challange
-
-data "template_file" "cluster_issuer_http" {
-  template = file("${path.module}/templates/cluster_issuer_http.yaml")
-}
-
-resource "helm_release" "cluster-issuer-http" {
-  count      = var.issuer_http
-  depends_on = [helm_release.cert-manager-init]
-  name       = "cluster-issuer-http"
-  namespace  = var.namespace
-  chart      = "sbp/anything"
-  values     = [data.template_file.cluster_issuer_http.rendered]
-}
-
-# Create Cluster Issuer with Self Signed CA
-
-data "template_file" "cluster_issuer_selfsigned" {
-  template = file("${path.module}/templates/cluster_issuer_selfsigned.yaml")
-}
-
-resource "kubernetes_secret" "self_signed_ca" {
-  count = var.issuer_selfsigned
-  metadata {
-    name      = "self-signed-ca-key-pair"
-    namespace = var.namespace
+data "template_file" "cluster_issuer_dns" {
+  template = file("${path.module}/templates/cluster_issuer_dns.yaml")
+  vars = {
+    hostedZoneID = var.hosted_zone_id
+    email        = var.email
+    region       = var.region
+    dns_role     = var.route53_role_arn
   }
-
-  data = var.self_signed_key_pair
-
-  type = "kubernetes.io/tls"
 }
 
-resource "helm_release" "cluster-issuer-self-signed" {
-  count      = var.issuer_selfsigned
-  depends_on = [helm_release.cert-manager-init]
-  name       = "cluster-issuer-selfsigned"
+resource "helm_release" "cluster-issuer-dns" {
+  count      = var.issuer_dns
+  depends_on = [helm_release.cert-manager]
+  name       = "cluster-issuer-dns"
   namespace  = var.namespace
   chart      = "sbp/anything"
-  values     = [data.template_file.cluster_issuer_selfsigned.rendered]
+  version    = "3.0.2"
+  values     = [data.template_file.cluster_issuer_dns.rendered]
 }
 
 resource "helm_release" "cert-manager" {
   name      = var.name
   namespace = var.namespace
-  chart     = "jetstack/${var.name}"
+  chart     = "${var.chart_repository}/${var.name}"
   version   = var.chart_version
   values    = [var.cert_manager_helm_values]
 }
-
