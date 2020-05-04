@@ -36,7 +36,6 @@ data "template_file" "cluster_issuer_dns" {
 }
 
 resource "helm_release" "cert-manager" {
-  depends_on = [kubernetes_namespace.cert-manager]
   name      = var.name
   namespace = var.namespace
   chart     = "${var.chart_repository}/${var.name}"
