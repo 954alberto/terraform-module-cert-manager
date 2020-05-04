@@ -1,2 +1,3 @@
-# Simple module for cert-manager
-for terraform inputs, see file: terraform-docs.md 
+# certmanager
+
+Terraform module to install certmanager helm chart

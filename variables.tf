@@ -6,26 +6,31 @@ variable "namespace" {
   description = "Namespace of the Helm release"
 }
 
-variable "helm_values" {
-  description = "Helm values for cosmic cloud controller chart."
+variable "issuer_http" {
+  description = "Enable or disable HTTP challange Cluster Issuer"
+  default     = 1
+}
+
+variable "issuer_selfsigned" {
+  description = "Enable or disable Self Signed Cluster Issuer"
+  default     = 0
+}
+
+variable "cert_manager_helm_values" {
+  description = "Helm values for cert manager chart."
+}
+
+variable "self_signed_key_pair" {
+  description = "A map with the CA cert and key"
+  default     = {}
 }
 
 variable "chart_version" {
-  description = "Helm chart version"
+  description = "Version of the chart to install"
+  default     = "0.10.0"
 }
 
-variable "chart" {
-  description = "Helm chart name"
-}
-
-variable "helm_repository" {
-  description = "Helm repository name"
-}
-
-variable "helm_repository_url" {
-  description = "Helm repository url"
-}
-
-variable "helm_timeout" {
-  description = "Helm timeout"
+variable "init_chart_version" {
+  description = "Version of the init chart to install"
+  default     = "1.1.0"
 }
