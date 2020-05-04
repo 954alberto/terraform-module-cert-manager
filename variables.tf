@@ -13,23 +13,8 @@ variable "issuer_dns" {
   default     = 1
 }
 
-variable "issuer_http" {
-  description = "Enable or disable HTTP challange Cluster Issuer"
-  default     = 1
-}
-
-variable "issuer_selfsigned" {
-  description = "Enable or disable Self Signed Cluster Issuer"
-  default     = 0
-}
-
 variable "cert_manager_helm_values" {
   description = "Helm values for cert manager chart."
-}
-
-variable "self_signed_key_pair" {
-  description = "A map with the CA cert and key"
-  default     = {}
 }
 
 variable "chart_version" {
