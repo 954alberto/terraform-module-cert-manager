@@ -43,12 +43,12 @@ resource "helm_release" "cert-manager" {
   values    = [var.cert_manager_helm_values]
 }
 
-#resource "helm_release" "cluster-issuer-dns" {
-#  count      = var.issuer_dns
-#  depends_on = [helm_release.cert-manager]
-#  name       = "cluster-issuer-dns"
-#  namespace  = var.namespace
-#  chart      = "sbp/anything"
-#  version    = "3.0.2"
-#  values     = [data.template_file.cluster_issuer_dns.rendered]
-#}
+resource "helm_release" "cluster-issuer-dns" {
+  count      = var.issuer_dns
+  depends_on = [helm_release.cert-manager]
+  name       = "cluster-issuer-dns"
+  namespace  = var.namespace
+  chart      = "sbp/anything"
+  version    = "3.0.2"
+  values     = [data.template_file.cluster_issuer_dns.rendered]
+}
