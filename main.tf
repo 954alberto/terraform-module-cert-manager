@@ -28,7 +28,8 @@ resource "helm_release" "cert-manager-init" {
 data "template_file" "cluster_issuer_dns" {
   template = file("${path.module}/templates/cluster_issuer_dns.yaml")
   vars = {
-    hostedZoneID = var.hosted_zone_id
+    name         = var.cluster_issuer_name
+    zones        = var.zones
     email        = var.email
     region       = var.region
     dns_role     = var.route53_role_arn
