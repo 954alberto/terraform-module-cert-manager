@@ -29,7 +29,7 @@ data "template_file" "cluster_issuer_dns" {
   template = file("${path.module}/templates/cluster_issuer_dns.yaml")
   vars = {
     name     = var.cluster_issuer_name
-    zones    = toset(var.zones)
+    zones    = tolist(var.zones)
     email    = var.email
     dns_role = var.route53_role_arn
   }
