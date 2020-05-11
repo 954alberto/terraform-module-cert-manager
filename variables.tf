@@ -38,3 +38,8 @@ variable "chart_repository" {
 variable "route53_role_arn" {
   description = "The arn of a role with permissions to update route53 for the hosted zone"
 }
+
+variable "cluster_issuer_name" {
+  description = "Name of the k8s object"
+}
+  

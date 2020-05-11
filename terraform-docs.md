@@ -13,6 +13,7 @@
 | cert\_manager\_helm\_values | Helm values for cert manager chart. | `any` | n/a | yes |
 | chart\_repository | The repository name to download the chart | `any` | n/a | yes |
 | chart\_version | Version of the chart to install | `any` | n/a | yes |
+| cluster\_issuer\_name | Name of the k8s object | `any` | n/a | yes |
 | email | email address for requests | `any` | n/a | yes |
 | init\_chart\_version | Version of the init chart to install | `any` | n/a | yes |
 | issuer\_dns | Enable or disable DNS challange Cluster Issuer | `any` | n/a | yes |
