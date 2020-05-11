@@ -31,7 +31,6 @@ data "template_file" "cluster_issuer_dns" {
     name     = var.cluster_issuer_name
     zones    = var.zones
     email    = var.email
-    region   = var.region
     dns_role = var.route53_role_arn
   }
 }
