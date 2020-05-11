@@ -27,7 +27,7 @@ variable "email" {
   description = "email address for requests"
 }
 
-variable "zone" {
+variable "zones" {
   description = "List of zones"
 }
 
