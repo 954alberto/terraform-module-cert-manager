@@ -1,3 +1,3 @@
-# certmanager
+# Terraform Module
 
-Terraform module to install certmanager helm chart
+Terraform module to install helm a chart.

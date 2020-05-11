@@ -22,16 +22,13 @@ variable "init_chart_version" {
   description = "Version of the init chart to install"
 }
 
-variable "hosted_zone_id" {
-  description = "The hosted zone id to populate for challenges"
-}
 
 variable "email" {
   description = "email address for requests"
 }
 
-variable "region" {
-  description = "aws region"
+variable "zone" {
+  description = "List of zones"
 }
 
 variable "chart_repository" {
